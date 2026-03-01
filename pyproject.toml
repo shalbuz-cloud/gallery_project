@@ -1,0 +1,62 @@
+[project]
+name = "gallery-project"
+version = "0.1.0"
+description = "Gallery project with Django and Bootstrap 5"
+authors = [{ name = "shalbuz", email = "sh.mursalov@mail.ru" }]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django==5.2",
+    "django-admin-sortable2>=2.3.1",
+    "django-filer>=3.4.4",
+    "easy-thumbnails>=2.10.1",
+    "mysqlclient>=2.2.8",
+    "pillow>=12.1.1",
+    "python-decouple>=3.8",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.9.6",
+    "mypy>=1.15.0",
+    "django-stubs>=5.1.0",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "C4", "W"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+section-order = ["future", "standard-library", "third-party", "django", "first-party", "local-folder"]
+
+[tool.ruff.lint.isort.sections]
+"django" = ["django"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.mypy]
+python_version = "3.12"
+plugins = ["mypy_django_plugin.main"]
+ignore_missing_imports = true
+
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+
+exclude = ["tests/", "manage.py", "migrations/"]
+
+[tool.django-stubs]
+django_settings_module = "config.settings"
+
+[[tool.mypy.overrides]]
+module = "*.migrations.*"
+ignore_errors = true

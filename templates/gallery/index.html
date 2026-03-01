@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Галерея изображений{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+        <h1 class="text-center mb-5">Галерея изображений</h1>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Большой слайдер -->
+                <div class="slider-for mb-4">
+                    {% for image in slider_images %}
+                        <div class="slider-for-item">
+                            <img src="{{ image.image.url }}"
+                                 alt="{{ image.title }}"
+                                 class="img-fluid rounded cursor-pointer"
+                                 data-bs-toggle="modal"
+                                 data-bs-target="#galleryModal"
+                                 data-index="{{ forloop.counter0 }}">
+                        </div>
+                    {% empty %}
+                        <div class="alert alert-info text-center">
+                            Нет изображения для отображения
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Навигационный слайдер (миниатюры) -->
+                <div class="slider-nav">
+                    {% for image in slider_images %}
+                        <div class="slider-nav-item px-2">
+                            <!-- TODO: Сделать миниатюры через библиотеку -->
+                            <img src="{{ image.image.url }}"
+                                 alt="{{ image.title }}"
+                                 class="img-fluid rounded cursor-pointer"
+                                 style="height: 100px; width: 100%; object-fit: cover;">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для полноэкранного просмотра -->
+    <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex align-items-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="modal-slider">
+                                    {% for image in slider_images %}
+                                        <div class="modal-slider-item">
+                                            <img src="{{ image.image.url }}"
+                                                 alt="{{ image.title }}"
+                                                 class="img-fluid"
+                                                 style="max-height: 90vh; margin: 0 auto;">
+
+                                            {% if image.description %}
+                                                <p class="text-white text-center mt-3">{{ image.description }}</p>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
