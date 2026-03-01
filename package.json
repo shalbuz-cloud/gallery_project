@@ -1,0 +1,19 @@
+{
+  "name": "gallery_project",
+  "version": "1.0.0",
+  "repository": "git@github.com:shalbuz-cloud/gallery_project.git",
+  "author": "shalbuz <sh.mursalov@mail.ru>",
+  "license": "MIT",
+  "scripts": {
+    "sass-dev": "sass assets/scss/main.scss static/css/main.css --source-map --watch",
+    "sass-min": "sass assets/scss/main.scss static/css/main.min.css --style=compressed --source-map --watch",
+    "watch": "npm-run-all --parallel sass-dev sass-min",
+    "build:js": "terser assets/js/main.js -o static/js/main.min.js",
+    "build": "npm run sass-dev && npm run sass-min && npm run build:js"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.97.3",
+    "terser": "^5.46.0"
+  }
+}
