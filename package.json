@@ -5,8 +5,9 @@
   "author": "shalbuz <sh.mursalov@mail.ru>",
   "license": "MIT",
   "scripts": {
-    "sass-dev": "sass assets/scss/main.scss static/css/main.css --source-map --watch",
-    "sass-min": "sass assets/scss/main.scss static/css/main.min.css --style=compressed --source-map --watch",
+    "sass-dev": "sass assets/scss:static/css --source-map --watch",
+    "sass-min": "sass assets/scss:static/css --style=compressed --source-map --watch",
+
     "js-dev": "terser assets/js/main.js -o static/js/main.js --source-map --watch",
     "js-min": "terser assets/js/main.js -o static/js/main.min.js --compress --mangle --source-map --watch",
     "watch": "npm-run-all --parallel sass-* js-*",
