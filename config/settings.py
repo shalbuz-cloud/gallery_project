@@ -147,8 +147,18 @@ MEDIA_ROOT = BASE_DIR / "media"
 THUMBNAIL_ALIASES = {
     "": {
         # Десктоп
-        "slider_main": {"size": (945, 530), "crop": True, "format": "WEBP", "quality": 90},
-        "slider_thumb": {"size": (165, 165), "crop": True, "format": "WEBP", "quality": 80},
+        "slider_main": {
+            "size": (945, 530),
+            "crop": True,
+            "format": "WEBP",
+            "quality": 90,
+        },
+        "slider_thumb": {
+            "size": (165, 165),
+            "crop": True,
+            "format": "WEBP",
+            "quality": 80,
+        },
         # Мобильные
         "slider_main_mobile": {"size": (340, 200), "crop": True, "format": "WEBP"},
         "slider_thumb_mobile": {"size": (80, 80), "crop": True, "format": "WEBP"},
