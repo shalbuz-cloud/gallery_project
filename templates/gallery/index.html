@@ -1,79 +1,106 @@
 {% extends "base.html" %}
 {% load static %}
+{% load thumbnail %}
 
 {% block title %}Галерея изображений{% endblock %}
 
 {% block content %}
-    <div class="container py-5">
-        <h1 class="text-center mb-5">Галерея изображений</h1>
 
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <!-- Большой слайдер -->
-                <div class="slider-for mb-4">
-                    {% for image in slider_images %}
-                        <div class="slider-for-item">
-                            <img src="{{ image.image.url }}"
-                                 alt="{{ image.title }}"
-                                 class="img-fluid rounded cursor-pointer"
-                                 data-bs-toggle="modal"
-                                 data-bs-target="#galleryModal"
-                                 data-index="{{ forloop.counter0 }}">
-                        </div>
-                    {% empty %}
-                        <div class="alert alert-info text-center">
-                            Нет изображения для отображения
-                        </div>
-                    {% endfor %}
+    <main>
+        <section class="hero py-section" id="advantages">
+            <div class="container">
+
+                <div class="row justify-content-center text-center mb-5">
+                    <div class="col-12 col-lg-8">
+                        <h1 class="fw-bold">Космическое агентство</h1>
+                        <p>
+                            Национальное управление по аэронавтике и исследованию космического пространства — ведомство,
+                            относящееся к федеральному правительству США и подчиняющееся непосредственно президенту США.
+                        </p>
+                    </div>
                 </div>
 
-                <!-- Навигационный слайдер (миниатюры) -->
-                <div class="slider-nav">
-                    {% for image in slider_images %}
-                        <div class="slider-nav-item px-2">
-                            <!-- TODO: Сделать миниатюры через библиотеку -->
-                            <img src="{{ image.image.url }}"
-                                 alt="{{ image.title }}"
-                                 class="img-fluid rounded cursor-pointer"
-                                 style="height: 100px; width: 100%; object-fit: cover;">
+                <div class="row align-items-center g-4">
+
+                    <div class="col-12 col-lg-6 order-2 order-lg-1">
+                        <div class="hero-image text-center">
+                            <img class="img-fluid" src="{% static 'images/earth.png' %}" alt="Earth">
                         </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
+                    </div>
 
-    <!-- Модальное окно для полноэкранного просмотра -->
-    <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content bg-dark">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex align-items-center">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="modal-slider">
-                                    {% for image in slider_images %}
-                                        <div class="modal-slider-item">
-                                            <img src="{{ image.image.url }}"
-                                                 alt="{{ image.title }}"
-                                                 class="img-fluid"
-                                                 style="max-height: 90vh; margin: 0 auto;">
-
-                                            {% if image.description %}
-                                                <p class="text-white text-center mt-3">{{ image.description }}</p>
-                                            {% endif %}
-                                        </div>
-                                    {% endfor %}
+                    <div class="col-12 col-lg-6 order-1 order-lg-2">
+                        <div class="row g-4 text-center">
+                            <div class="col-6">
+                                <div class="feature">
+                                    <img src="{% static 'icons/features/fa6-solid_shuttle-space.svg' %}"
+                                         alt="Спейс шаттл" class="feature-icon">
+                                    <p class="feature-text">Спейс шаттлы — пилотируемые корабли</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="feature">
+                                    <img src="{% static 'icons/features/ion_telescope.svg' %}"
+                                         alt="Телескопическое оборудование" class="feature-icon">
+                                    <p class="feature-text">Лучшее телескопическое оборудование</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="feature">
+                                    <img src="{% static 'icons/features/bi_moon-stars-fill.svg' %}"
+                                         alt="Исследовательская станция" class="feature-icon">
+                                    <p class="feature-text">Исследовательские станции на Луне</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="feature">
+                                    <img src="{% static 'icons/features/bxs_medal.svg' %}" alt="Золотая медаль"
+                                         class="feature-icon">
+                                    <p class="feature-text">Золотая медаль по научным исследованиям</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+
+        <section class="photos py-section" id="photos">
+            <div class="container">
+                <h2 class="section-title text-center fw-bold">Фотографии</h2>
+                <div class="photo-slider-wrap">
+                    <!-- Основной слайдер (большие, но оптимизированные фото) -->
+                    <div class="slider slider-for photo-main">
+                        {% for item in slider_images %}
+                            <div>
+                                {# Используем оригинал для ссылки (fullscreen), но превью для отображения в слайдере #}
+                                <a href="{{ item.image.url }}" class="gallery-link">
+                                    <picture>
+                                        {# Если экран меньше 768px, грузим мобильную версию #}
+                                        <source srcset="{% thumbnail item.image 'slider_main_mobile' %}"  media="(max-width: 767px)">
+                                        {# В остальных случаях — десктопную #}
+                                        <img src="{% thumbnail item.image 'slider_main' %}"
+                                             alt="{{ item.title }}"
+                                             class="img-fluid">
+                                    </picture>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Навигация (маленькие миниатюры) -->
+                    <div class="slider slider-nav photo-thumbs">
+                        {% for item in slider_images %}
+                            <div class="photo-thumb-frame">
+                                {# Генерируем маленькое квадратное превью 165x165 #}
+                                <source srcset="{% thumbnail item.image 'slider_thumb_mobile' %}" media="(max-width: 767px)">
+                                <img src="{% thumbnail item.image 'slider_thumb' %}" alt="{{ item.title }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
 {% endblock %}

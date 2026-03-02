@@ -1,0 +1,16 @@
+// Цвета
+$red:        #ff342b;
+$blue:       #0b3d91;
+$black:      #0d0f12;
+$dark:       #17191d;
+$gray:       #1f242c;
+$light-gray: #c3cddd;
+$white:      #fff;
+
+// Шрифты
+$font-family: "Montserrat", sans-serif;
+
+// Миксин для медиа-запросов
+@mixin mobile {
+  @media (max-width: 767.98px) { @content; }
+}

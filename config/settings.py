@@ -146,8 +146,12 @@ MEDIA_ROOT = BASE_DIR / "media"
 # Настраиваем алиасы (размеры)
 THUMBNAIL_ALIASES = {
     "": {
-        "card_1x": {"size": (400, 300), "crop": True, "format": "WEBP"},
-        "card_2x": {"size": (800, 600), "crop": True, "format": "WEBP"},  # Для Retina
+        # Десктоп
+        "slider_main": {"size": (945, 530), "crop": True, "format": "WEBP", "quality": 90},
+        "slider_thumb": {"size": (165, 165), "crop": True, "format": "WEBP", "quality": 80},
+        # Мобильные
+        "slider_main_mobile": {"size": (340, 200), "crop": True, "format": "WEBP"},
+        "slider_thumb_mobile": {"size": (80, 80), "crop": True, "format": "WEBP"},
     },
 }
 

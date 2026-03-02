@@ -1,0 +1,35 @@
+{% load static %}
+
+<header class="site-header">
+    <nav class="navbar navbar-dark navbar-expand-lg">
+        <div class="container d-flex align-items-center">
+
+            <!-- Группа: Бургер + Логотип -->
+            <div class="d-flex align-items-center me-auto">
+                <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#mainNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand p-0" href="/">
+                    <img src="{% static 'icons/logo/nasa-logo.svg' %}" alt="NASA" height="64">
+                </a>
+            </div>
+
+            <!-- Меню (на ПК будет по центру) -->
+            <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+                <ul class="navbar-nav gap-lg-4 text-uppercase">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'gallery:index' %}#advantages">Преимущества</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'gallery:index' %}#photos">Фотографии</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Кнопка "Вход" (всегда справа) -->
+            <a class="btn btn-enter ms-auto ms-lg-0" href="{% url 'admin:login' %}">Вход</a>
+        </div>
+    </nav>
+
+</header>

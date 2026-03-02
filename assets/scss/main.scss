@@ -1,0 +1,277 @@
+@use 'variables' as *;
+
+/* Fonts */
+@mixin font-face($weight, $file) {
+    @font-face {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-display: swap;
+        font-weight: $weight;
+        src: url('../fonts/#{$file}.woff2') format('woff2');
+    }
+}
+
+@include font-face(400, 'montserrat-v31-cyrillic_latin-regular');
+@include font-face(600, 'montserrat-v31-cyrillic_latin-600');
+@include font-face(700, 'montserrat-v31-cyrillic_latin-700');
+
+/* Базовые стили */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scrollbar-gutter: stable;
+}
+
+body {
+    font-family: $font-family;
+    background: $black;
+    color: $white;
+}
+
+h1 { 
+    font-size: 56px; 
+    @include mobile { font-size: 36px; }
+}
+
+h2 { 
+    font-size: 42px; 
+    line-height: 52px; 
+    @include mobile { font-size: 30px; line-height: 36px; }
+}
+
+h3 { 
+    font-size: 16px; 
+    line-height: 24px; 
+    @include mobile { font-size: 13px; line-height: 20px; }
+}
+
+h4 { font-size: 20px; line-height: 26px; }
+p  { font-size: 18px; line-height: 30px; }
+
+.text-small {
+    font-size: 15px;
+    line-height: 30px;
+}
+
+.py-section {
+    padding-top: 90px;
+    padding-bottom: 90px;
+    @include mobile {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+}
+
+/* Header & Navbar */
+.site-header {
+    background-color: $dark;
+}
+
+.navbar {
+    padding: 18px 0;
+
+    .nav-link {
+        color: $white;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+
+        &:hover {
+            color: $light-gray;
+        }
+    }
+}
+
+.btn-enter {
+    margin: 0;
+    width: 88px;
+    height: 44px;
+    min-width: 88px;
+    min-height: 44px;
+    padding: 12px 18px;
+    text-transform: uppercase;
+    font-weight: 700;
+    background-color: $red;
+    color: $white;
+
+    &:hover {
+        color: inherit;
+    }
+}
+
+/* Hero Section */
+.hero {
+    &-title {
+        margin-bottom: 16px;
+        line-height: normal;
+    }
+
+    &-subtitle {
+        color: $light-gray;
+        line-height: 30px;
+    }
+}
+
+.feature {
+    background: transparent;
+    color: $white;
+
+    &-icon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 30px;
+    }
+
+    &-text {
+        line-height: 150%;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: $white;
+    }
+}
+
+/* Photos Section */
+.photos {
+    background-color: $gray;
+}
+
+.section-title {
+    margin-bottom: 60px;
+    @include mobile {
+        margin-bottom: 45px;
+    }
+}
+
+/* Slick Slider */
+.photo-slider-wrap {
+    width: 100%;
+    max-width: 1041px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    
+    @include mobile {
+        max-width: 100%;
+        gap: 20px;
+    }
+}
+
+.photo-main {
+    width: 100%;
+    max-width: 945px;
+    height: 529px;
+    overflow: hidden;
+    border-radius: 4px;
+
+    @include mobile {
+        height: auto;
+        aspect-ratio: 945 / 529;
+    }
+
+    img, .slick-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 4px;
+    }
+
+    .slick-list, .slick-track, .slick-slide, .slick-slide > div {
+        height: 100%;
+    }
+}
+
+.photo-thumbs {
+    width: 100%;
+    max-width: 975px;
+
+    .slick-list {
+        margin: 0;
+        padding: 0 !important;
+        overflow: hidden;
+    }
+
+    .slick-track {
+        margin: 0 auto;
+    }
+
+    .slick-slide {
+        opacity: 1;
+        padding: 0 12.5px;
+        box-sizing: border-box;
+
+        @include mobile {
+            padding: 0 6px;
+        }
+
+        img {
+            width: 165px;
+            height: 165px;
+            margin: 0 auto;
+            border-radius: 4px;
+            border: 2px solid transparent;
+            object-fit: cover;
+            display: block;
+
+            @include mobile {
+                width: 100%;
+                max-width: 165px;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+        }
+
+        &.slick-current img {
+            border-color: $white;
+            opacity: 1;
+        }
+    }
+}
+
+/* Slick Arrows */
+.slick-arrow {
+    background: $red;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    z-index: 5;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    &:hover, &:focus {
+        background: $red;
+    }
+
+    &:before {
+        content: "";
+        display: block;
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        opacity: 1;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+    }
+}
+
+.slick-prev {
+    left: -88px;
+    @include mobile { left: -56px; }
+    &:before {
+        -webkit-mask: url("../icons/slider-arrow/move-left.svg") no-repeat center;
+        mask: url("../icons/slider-arrow/move-left.svg") no-repeat center;
+    }
+}
+
+.slick-next {
+    right: -88px;
+    @include mobile { right: -56px; }
+    &:before {
+        -webkit-mask: url("../icons/slider-arrow/move-right.svg") no-repeat center;
+        mask: url("../icons/slider-arrow/move-right.svg") no-repeat center;
+    }
+}
