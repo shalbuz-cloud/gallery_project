@@ -1,36 +1,3 @@
-## Использование
-
-```bash
-# Проверка конфигурации / синтаксиса
-python manage.py check
-
-# Если ошибок нет, создаем миграции
-python manage.py makemigrations
-
-# Применяем миграции
-python manage.py migrate
-
-# Создайте суперпользователя
-python manage.py createsuperuser
-
-# Запускаем сервер
-python manage.py runserver
-```
-
----
-
-## Дополнительные команды
-
-```bash
-# Проверка подключение к БД
-python manage.py check --database default
-
-# Проверка миграций
-python manage.py showmigrations
-```
-
----
-
 # Gallery Project 🖼️
 
 Современное веб-приложение для создания фотогалерей с возможностью синхронизированного слайдера, построенное на Django и
