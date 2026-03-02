@@ -27,7 +27,7 @@ urlpatterns = [
 ]
 
 # Переопределяем logout в админке для перенаправления
-admin.site.logout = LogoutView.as_view(next_page='/')
+admin.site.logout = LogoutView.as_view(next_page="/")
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

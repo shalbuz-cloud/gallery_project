@@ -46,6 +46,7 @@ THIRD_PARTY_APPS = [
     "adminsortable2",
     "filer",
     "easy_thumbnails",
+    "fancybox",
 ]
 
 LOCAL_APPS = [

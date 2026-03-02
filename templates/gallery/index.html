@@ -4,6 +4,10 @@
 
 {% block title %}Галерея изображений{% endblock %}
 
+{% block extr_css %}
+    {% include "fancybox/fancybox_css.html" %}
+{% endblock %}
+
 {% block content %}
 
     <main>
@@ -73,10 +77,11 @@
                         {% for item in slider_images %}
                             <div>
                                 {# Используем оригинал для ссылки (fullscreen), но превью для отображения в слайдере #}
-                                <a href="{{ item.image.url }}" class="gallery-link">
+                                <a href="{{ item.image.url }}" class="gallery-link" data-fancybox="gallery" data-caption="{{ item.title }}">
                                     <picture>
                                         {# Если экран меньше 768px, грузим мобильную версию #}
-                                        <source srcset="{% thumbnail item.image 'slider_main_mobile' %}"  media="(max-width: 767px)">
+                                        <source srcset="{% thumbnail item.image 'slider_main_mobile' %}"
+                                                media="(max-width: 767px)">
                                         {# В остальных случаях — десктопную #}
                                         <img src="{% thumbnail item.image 'slider_main' %}"
                                              alt="{{ item.title }}"
@@ -92,7 +97,8 @@
                         {% for item in slider_images %}
                             <div class="photo-thumb-frame">
                                 {# Генерируем маленькое квадратное превью 165x165 #}
-                                <source srcset="{% thumbnail item.image 'slider_thumb_mobile' %}" media="(max-width: 767px)">
+                                <source srcset="{% thumbnail item.image 'slider_thumb_mobile' %}"
+                                        media="(max-width: 767px)">
                                 <img src="{% thumbnail item.image 'slider_thumb' %}" alt="{{ item.title }}">
                             </div>
                         {% endfor %}
@@ -103,4 +109,8 @@
         </section>
     </main>
 
+{% endblock %}
+
+{% block extra_js %}
+    {% include "fancybox/fancybox_js.html" %}
 {% endblock %}

@@ -108,6 +108,15 @@ wheels = [
 ]
 
 [[package]]
+name = "django-fancybox"
+version = "0.1.6"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/e0/6d/678452ea9e4051c8593b9a800fd20bbc64ba06f2e5f72f4e22399cb58a27/django-fancybox-0.1.6.tar.gz", hash = "sha256:e0e044b1f4833f0d6282fb5daca86e33296915e6c8c05d07a20d2adb1fa430bb", size = 30042, upload-time = "2020-10-06T03:18:17.565Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/40/f8/df0207fbcdf4814f695b2c389eed51f85d914df116eaa4eeab6d895385a4/django_fancybox-0.1.6-py2.py3-none-any.whl", hash = "sha256:dfbbbf46966ecc0738dddb46cadfbc88164a4b2266a97b37356df1f54995cbc2", size = 30192, upload-time = "2020-10-06T03:18:20.182Z" },
+]
+
+[[package]]
 name = "django-filer"
 version = "3.4.4"
 source = { registry = "https://pypi.org/simple" }
@@ -189,6 +198,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "django" },
     { name = "django-admin-sortable2" },
+    { name = "django-fancybox" },
     { name = "django-filer" },
     { name = "easy-thumbnails" },
     { name = "mysqlclient" },
@@ -207,6 +217,7 @@ dev = [
 requires-dist = [
     { name = "django", specifier = "==5.2" },
     { name = "django-admin-sortable2", specifier = ">=2.3.1" },
+    { name = "django-fancybox", specifier = ">=0.1.6" },
     { name = "django-filer", specifier = ">=3.4.4" },
     { name = "easy-thumbnails", specifier = ">=2.10.1" },
     { name = "mysqlclient", specifier = ">=2.2.8" },
